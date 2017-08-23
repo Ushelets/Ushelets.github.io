@@ -1,6 +1,6 @@
-# {{ name }}
+# pepelats
 
-> {{ description }}
+> pepelats-vue
 
 ## Build Setup
 
