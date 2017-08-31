@@ -1,13 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
-import history from 'connect-history-api-fallback';
+/*import history from 'connect-history-api-fallback';*/
 
 
 const port = process.env.PORT || 5000;
 const app = express();
 
-app.use(history());
+/*app.use(history());*/
 app.use(bodyParser.json());
 app.use('/dist', express.static('dist'));
 
@@ -15,6 +15,12 @@ import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../webpack.config.dev';
+
+/*this.webpackHotMiddleware = webpackHotMiddleware(compiler, {
+        path: '/_next/webpack-hmr',
+        log: false,
+        heartbeat: 2500
+});*/
 
 if (process.env.NODE_ENV === 'development') {
     const compiler = webpack(webpackConfig);

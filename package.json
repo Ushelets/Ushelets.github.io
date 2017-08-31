@@ -23,7 +23,8 @@
     "express": "^4.15.4",
     "loader-utils": "^1.1.0",
     "stylus": "^0.54.5",
-    "vue": "^2.4.2"
+    "vue": "^2.4.2",
+    "vue-router": "^2.7.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
