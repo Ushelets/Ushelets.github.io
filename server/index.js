@@ -17,9 +17,10 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../webpack.config.dev';
 
 /*this.webpackHotMiddleware = webpackHotMiddleware(compiler, {
-        path: '/_next/webpack-hmr',
-        log: false,
         heartbeat: 2500
+});
+this.webpackMiddleware = webpackMiddleware(compiler, {
+    heartbeat: 2500
 });*/
 
 if (process.env.NODE_ENV === 'development') {
@@ -36,4 +37,4 @@ app.get('/*', (req, res) =>{
     res.sendFile(path.join(__dirname, '../index.html'))
 });
 
-app.listen(port, () => console.log('Server listen on port =', port, 'ENV =', process.env.NODE_ENV));
+app.listen(port, () => console.log('Server listen on port =', port, 'ENV =', process.env.NODE_ENV), 2500);
