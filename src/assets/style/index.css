@@ -1,0 +1,20 @@
+.index {
+  text-align: center;
+  margin: auto;
+}
+.index img {
+  padding: 100px 0 0 0;
+  width: 500px;
+  height: 500px;
+}
+.index .input {
+  width: 150px;
+  margin: auto;
+}
+.index a {
+  color: #000;
+  text-decoration: none;
+}
+.index a:hover {
+  color: #482bb9;
+}
