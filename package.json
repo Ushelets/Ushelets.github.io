@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "heroku-postbuild": "npm run build",
-    "dev": "cross-env PORT=5000 nodemon --config nodemon.json --watch server --exec babel-node server/index.js ",
+    "dev": "cross-env PORT=5000 nodemon --config nodemon.json --watch server --exec babel-node server/index.js --keepAliveTimeout 2000",
     "start": "cross-env PORT=5000 & babel-node server/index.js",
     "build": "webpack --progress --hide-modules",
     "test": "babel-node spec/run.js"
