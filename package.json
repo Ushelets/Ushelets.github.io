@@ -8,7 +8,7 @@
     "heroku-postbuild": "npm run build",
     "dev": "cross-env PORT=5000 nodemon --config nodemon.json --watch server --exec babel-node server/index.js --keepAliveTimeout 25000",
     "start": "cross-env PORT=5000 & babel-node server/index.js",
-    "build": "webpack --progress --hide-modules --keepAliveTimeout 25000",
+    "build": "webpack --progress --hide-modules --display-error-details --verbose",
     "test": "babel-node spec/run.js"
   },
   "dependencies": {
