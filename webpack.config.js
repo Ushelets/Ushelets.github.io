@@ -1,8 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
+const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
-  entry: './src/main.js',
+  entry: [
+      path.join(__dirname, '/src/app.js')
+  ],
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
@@ -22,11 +25,15 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/
       },
+        {
+        test: /\.json$/,
+        loader: 'json-loader'}
+        ,
       {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]?[hash]'
+          name: 'img/[name].[ext]?[hash]'
         }
       }
     ]
@@ -36,10 +43,10 @@ module.exports = {
       'vue$': 'vue/dist/vue.esm.js'
     }
   },
-  devServer: {
+  /*devServer: {
     historyApiFallback: true,
     noInfo: true
-  },
+  },*/
   performance: {
     hints: false
   },
@@ -48,7 +55,6 @@ module.exports = {
 
 if (process.env.NODE_ENV === 'production') {
   module.exports.devtool = '#source-map';
-  // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
       'process.env': {
@@ -57,9 +63,24 @@ if (process.env.NODE_ENV === 'production') {
     }),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
+        beatify: false,
+        comments: false,
       compress: {
-        warnings: false
+          sequences: true,
+          booleans: true,
+          loops: true,
+          unused: true,
+          warnings: false,
+          drop_console: true,
+          unsafe: true
       }
+    }),
+    new CompressionPlugin({
+        asset: "[path].gz[query]",
+        algorithm: "gzip",
+        test: /\.(js|css|html|svg)$/,
+        threshold:10240,
+        minRatio:0.8
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
