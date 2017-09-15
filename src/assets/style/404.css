@@ -1,0 +1,78 @@
+.pagesNotFound {
+  text-align: center;
+  margin: auto;
+}
+.pagesNotFound .Ku {
+  display: inline-block;
+  margin: auto;
+}
+.pagesNotFound img {
+  padding: 100px 0 0 0;
+  width: 500px;
+  height: 500px;
+}
+.pagesNotFound .output {
+  width: 350px;
+  margin: auto;
+}
+.pagesNotFound a {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 32px;
+  font-weight: bold;
+  margin: 10px;
+}
+.pagesNotFound a:hover {
+  color: #b9655e;
+}
+.pagesNotFound .ku-animation-enter-active {
+  animation: ku-animation 0.5s;
+}
+.pagesNotFound .ku-animation-leave-active {
+  animation: ku-animation 0.5s reverse;
+}
+@-moz-keyframes ku-animation {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes ku-animation {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@-o-keyframes ku-animation {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes ku-animation {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
