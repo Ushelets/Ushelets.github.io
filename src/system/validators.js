@@ -1,25 +1,30 @@
 import Validator from 'validator'
 import isEmpty from 'lodash/isEmpty'
-import VueNotifications from 'vue-notifications'
 
-    export default (model) => {
+
+    export default (model, key = '') => {
         const errors = {};
 
-        if (!Validator.isEmail(model.email)) {
-            errors.email = true;
-            VueNotifications.error({ message: 'Не верный формат почты!' })
-        }
         if (isEmpty(model.password)) {
-            errors.password = true;
-            VueNotifications.error({ message: 'Введите пароль!' })
+            errors.passwordEmpty = 'Введите пароль!';
         }
-        if (isEmpty(model.rePassword)) {
-            errors.rePassword = true;
-            VueNotifications.error({ message: 'Повторите пароль!' })
+        if (isEmpty(model.email)) {
+            errors.emailEmpty = 'Введите почтовый адрес!';
         }
-        if (model.password !== model.rePassword){
-            errors.different = true;
-            VueNotifications.error({ message: 'Пароли не совпадают!' })
+        if (!Validator.isEmail(model.email)){
+            errors.emailError = 'Не верный формат почты!';
+        }
+
+        if (!Validator.isLength(model.password, {min:6})){
+            errors.passwordLength = 'Длина пароля должна быть не менее 6 символов!';
+        }
+        if (key === 'reg') {
+            if (isEmpty(model.rePassword)) {
+                errors.rePassword = 'Повторите пароль!';
+            }
+            if (model.password !== model.rePassword){
+                errors.different = 'Пароли не совпадают!';
+            }
         }
 
         return {

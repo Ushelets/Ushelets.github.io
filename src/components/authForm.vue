@@ -1,16 +1,22 @@
 <template>
-    <div class="login-wrap">
+    <div>
+        <notifications
+                group="auth-notification"
+                position="bottom left"
+                :speed=500
+        />
+        <div class="login-wrap">
         <input id="tabInput" type="radio" name="tab" class="sign-in" checked/><label for="tabInput" class="tab" @click="showForm(1)">Вход</label>
         <input id="tabRegistration" type="radio" name="tab" class="sign-up"/><label for="tabRegistration" class="tab" @click="showForm(2)">Регистрация</label>
         <transition name="component-fade">
-            <form class="sign-in-form" v-show="showSignInForm" @submit.prevent = "auth(model)">
+            <form class="sign-in-form" v-show="showSignInForm" @submit.prevent = "submit()">
                 <div class="input-group">
                     <label for="emailIn" class="label">Почта</label>
-                    <input id="emailIn" type="email" class="input" required v-model.lazy="model.email"/>
+                    <input id="emailIn" type="email" class="input" v-model.lazy="model.email"/>
                 </div>
                 <div class="input-group">
                     <label for="passIn" class="label">Пароль</label>
-                    <input id="passIn" type="password" class="input" data-type="password" required v-model.lazy="model.password"/>
+                    <input id="passIn" type="password" class="input" data-type="password" v-model.lazy="model.password"/>
                 </div>
                 <button type="submit">ВОЙТИ</button>
                 <div class="hr"></div>
@@ -20,18 +26,18 @@
             </form>
         </transition>
         <transition name="component-fade">
-            <form class="sign-up-form" v-show="showSignUpForm" @submit.prevent = "submit()">
+            <form class="sign-up-form" v-show="showSignUpForm" @submit.prevent = "submit('reg')">
                 <div class="input-group">
                     <label for="emailUp" class="label">Почта</label>
-                    <input id="emailUp" type="email" class="input" required v-model.lazy="model.email"/>
+                    <input id="emailUp" type="email" class="input" v-model.lazy="model.email"/>
                 </div>
                 <div class="input-group">
                     <label for="passUp" class="label">Пароль</label>
-                    <input id="passUp" type="password" class="input" data-type="password" required v-model.lazy="model.password"/>
+                    <input id="passUp" type="password" class="input" data-type="password" v-model.lazy="model.password"/>
                 </div>
                 <div class="input-group">
                     <label for="rePass" class="label">Повторить пароль</label>
-                    <input id="rePass" type="password" class="input" data-type="password" required v-model.lazy="model.rePassword"/>
+                    <input id="rePass" type="password" class="input" data-type="password" v-model.lazy="model.rePassword"/>
                 </div>
                 <button type="submit">РЕГИСТРАЦИЯ</button>
                 <div class="hr"></div>
@@ -41,11 +47,12 @@
             </form>
         </transition>
     </div>
+    </div>
+
 </template>
 
 <script>
     import {mapActions} from 'vuex'
-    import auth from '../../server/routes/auth'
     import valid from '../system/validators'
 
     export default {
@@ -56,7 +63,7 @@
                 model: {
                     email: '',
                     password: '',
-                    rePassword: null
+                    rePassword: ''
                 }
             }
         },
@@ -76,9 +83,20 @@
                         break;
                 }
             },
-            submit() {
-                if (valid(this.model).isValid) {
+            submit(key) {
+
+                if (valid(this.model, key).isValid) {
                     this.auth(this.model)
+                }
+                else {
+                    let group = 'auth-notification';
+                    let type = 'error';
+                    let title = 'ОШИБКА ВВОДА ДАННЫХ';
+                    const err = valid(this.model, key).errors;
+                    for (let key in err) {
+                        let text = err[key];
+                        this.$notify({group,title,text,type});
+                    }
                 }
 
             }

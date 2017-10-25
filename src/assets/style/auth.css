@@ -80,6 +80,10 @@
   color: #fff;
   display: block;
   background: #b9655e;
+  outline: none;
+}
+.login-wrap button:active {
+  opacity: 0.8;
 }
 .login-wrap .hr {
   height: 2px;
