@@ -1,9 +1,9 @@
-import express from 'express';
+﻿import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
 import morgan from 'morgan';
 import session from 'express-session';
-import knexSessionStore from 'connect-session-knex';
+import KnexSessionStore from 'connect-session-knex';
 import Debug from 'debug';
 import db from './controllers/config/knex';
 import devOptions from './controllers/config/dev.serv.opt';
@@ -12,10 +12,10 @@ import serveStatic from 'serve-static';
 
 import auth from './routes/auth';
 
-const SessionStore = knexSessionStore(session);
+const SessionStore = KnexSessionStore(session);
 const store = new SessionStore({
     knex: db,
-    tableName: 'session'
+    tablename: 'session'
 });
 const debug = Debug('server:app');
 const port = process.env.PORT || 5000;
@@ -23,6 +23,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(morgan('dev'));
+app.use(history());
 //app.use('/dist', express.static('dist'));
 app.use(session({
     secret: 'secret',
@@ -30,7 +31,6 @@ app.use(session({
     resave: true,
     store: store
 }));
-app.use(history());
 app.use(serveStatic(path.join(__dirname, '..', 'dist')));// для сбора статистики - после всех app.use
 
 devOptions(app);
