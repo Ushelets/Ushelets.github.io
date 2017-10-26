@@ -11,3 +11,4 @@ yarn-error.log
 *.njsproj
 *.sln
 
+/server/controllers/config/heroku.dev.js
