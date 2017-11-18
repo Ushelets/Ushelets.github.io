@@ -17,7 +17,7 @@ const store = new SessionStore({
     knex: db,
     tablename: 'session'
 });
-const debug = Debug('server:app');
+const debug = Debug('server:app'); 
 const port = process.env.PORT || 5000;
 const app = express();
 

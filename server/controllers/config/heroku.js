@@ -1,6 +1,7 @@
 import url from 'url'
 import herokuDev from './heroku.dev';
 
+if (!process.env.NODE_ENV) process.env.NODE_ENV = 'test';
 
 const heroku = {};
 
@@ -14,7 +15,7 @@ if (process.env.NODE_ENV === 'production') {
     heroku.database = params.pathname.split('/')[1];
 }
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
     heroku.user =  herokuDev.user;
     heroku.password =  herokuDev.password;
     heroku.host = herokuDev.host;

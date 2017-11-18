@@ -13,7 +13,7 @@
   },
   "env": {
     "NODE_ENV": "development",
-    "PORT": 5000
+    "PORT": 8000
   },
   "ext": "js json"
 }
