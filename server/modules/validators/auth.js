@@ -6,7 +6,7 @@ export default (email, password) => {
     const errors = {};
 
     if (!Validator.isEmail(email)){
-        errors.emailError = 'Не верный формат почты!';
+        errors.emailError = 'Неверный формат почты!';
     }
     if (!Validator.isLength(password, {min:6})){
         errors.passwordLength = 'Длина пароля должна быть не менее 6 символов!';

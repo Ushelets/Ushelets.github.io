@@ -1,27 +1,26 @@
-import valid from '../../src/system/validators'
+п»їimport valid from '../../src/system/validators'
 import modelClient from '../data/authClient'
-
 const key = 'reg';
 
-describe('Проверка модуля validators на клиенте:', () => {
-    it('Все поля верно заполнены!', () => {
+describe('РџСЂРѕРІРµСЂРєР° РјРѕРґСѓР»СЏ validators РЅР° РєР»РёРµРЅС‚Рµ:', () => {
+    it('Р’СЃРµ РїРѕР»СЏ РІРµСЂРЅРѕ Р·Р°РїРѕР»РЅРµРЅС‹!', () => {
         expect(valid(modelClient[0]).isValid).toBe(true);
         expect(valid(modelClient[0]).errors).toEqual({})
     });
-    it('Пароль не заполнен!', () => {
+    it('РџР°СЂРѕР»СЊ РЅРµ Р·Р°РїРѕР»РЅРµРЅ!', () => {
         expect(valid(modelClient[1]).isValid).toBe(false);
-        expect(valid(modelClient[1]).errors).toEqual({ passwordLength: 'Длина пароля должна быть не менее 6 символов!', passwordEmpty: 'Введите пароль!' })
+        expect(valid(modelClient[1]).errors).toEqual({ passwordLength: 'Р”Р»РёРЅР° РїР°СЂРѕР»СЏ РґРѕР»Р¶РЅР° Р±С‹С‚СЊ РЅРµ РјРµРЅРµРµ 6 СЃРёРјРІРѕР»РѕРІ!', passwordEmpty: 'Р’РІРµРґРёС‚Рµ РїР°СЂРѕР»СЊ!' })
     });
-    it('Почтовый адрес не заполнен!', () => {
+    it('РџРѕС‡С‚РѕРІС‹Р№ Р°РґСЂРµСЃ РЅРµ Р·Р°РїРѕР»РЅРµРЅ!', () => {
         expect(valid(modelClient[2]).isValid).toBe(false);
-        expect(valid(modelClient[2]).errors).toEqual({ emailError: 'Не верный формат почты!', emailEmpty: 'Введите почтовый адрес!' })
+        expect(valid(modelClient[2]).errors).toEqual({ emailError: 'РќРµРІРµСЂРЅС‹Р№ С„РѕСЂРјР°С‚ РїРѕС‡С‚С‹!', emailEmpty: 'Р’РІРµРґРёС‚Рµ РїРѕС‡С‚РѕРІС‹Р№ Р°РґСЂРµСЃ!' })
     });
-    it('Не верный формат почты!', () => {
+    it('РќРµРІРµСЂРЅР°СЏ РїРѕС‡С‚Р°!', () => {
         expect(valid(modelClient[3]).isValid).toBe(false);
-        expect(valid(modelClient[3]).errors).toEqual({ emailError: 'Не верный формат почты!' })
+        expect(valid(modelClient[3]).errors).toEqual({ emailError: 'РќРµРІРµСЂРЅС‹Р№ С„РѕСЂРјР°С‚ РїРѕС‡С‚С‹!' })
     });
-    it('Пароль не верен!', () => {
+    it('РџР°СЂРѕР»СЊ РЅРµ РІРµСЂРµРЅ!', () => {
         expect(valid(modelClient[4], key).isValid).toBe(false);
-        expect(valid(modelClient[4], key).errors).toEqual({ different: 'Пароли не совпадают!' }, { passwordLength: 'Длина пароля должна быть не менее 6 символов!' })
+        expect(valid(modelClient[4], key).errors).toEqual({ different: 'РџР°СЂРѕР»Рё РЅРµ СЃРѕРІРїР°РґР°СЋС‚!' }, { passwordLength: 'Р”Р»РёРЅР° РїР°СЂРѕР»СЏ РґРѕР»Р¶РЅР° Р±С‹С‚СЊ РЅРµ РјРµРЅРµРµ 6 СЃРёРјРІРѕР»РѕРІ!' })        
     })
 });

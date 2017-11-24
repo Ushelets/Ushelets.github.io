@@ -1,4 +1,4 @@
-import Validator from 'validator'
+﻿import Validator from 'validator'
 import isEmpty from 'lodash/isEmpty'
 
 
@@ -12,7 +12,7 @@ import isEmpty from 'lodash/isEmpty'
             errors.emailEmpty = 'Введите почтовый адрес!';
         }
         if (!Validator.isEmail(model.email)){
-            errors.emailError = 'Не верный формат почты!';
+            errors.emailError = 'Неверный формат почты!';
         }
 
         if (!Validator.isLength(model.password, {min:6})){

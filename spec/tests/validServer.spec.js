@@ -1,4 +1,4 @@
-import valid from '../../server/modules/validators'
+﻿import valid from '../../server/modules/validators'
 import modelServer from '../data/authServer'
 
 const key = 'reg';
@@ -14,10 +14,10 @@ describe('Проверка модуля validators на сервере:', () => 
       });
       it('Почтовый адрес не заполнен!', () => {
             expect(valid.Auth(modelServer[2].email, modelServer[2].password).isValid).toBe(false);
-            expect(valid.Auth(modelServer[2].email, modelServer[2].password).errors).toEqual({emailError: 'Не верный формат почты!', emailEmpty: 'Введите почтовый адрес!'})
+            expect(valid.Auth(modelServer[2].email, modelServer[2].password).errors).toEqual({emailError: 'Неверный формат почты!', emailEmpty: 'Введите почтовый адрес!'})
       });
-      it('Не верный формат почты!', () => {
+      it('Неверная почта!', () => {
             expect(valid.Auth(modelServer[3].email, modelServer[3].password).isValid).toBe(false);
-            expect(valid.Auth(modelServer[3].email, modelServer[3].password).errors).toEqual({ emailError: 'Не верный формат почты!'})
+            expect(valid.Auth(modelServer[3].email, modelServer[3].password).errors).toEqual({ emailError: 'Неверный формат почты!'})
       });     
 });
