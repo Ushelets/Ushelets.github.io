@@ -1,8 +1,6 @@
 ﻿import valid from '../../server/modules/validators'
 import modelServer from '../data/auth.valid.Server'
 
-const key = 'reg';
-
 describe('Проверка модуля validators на сервере:', () => {
       it('Все поля верно заполнены!', () => {
             expect(valid.Auth(modelServer[0].email, modelServer[0].password).isValid).toBe(true);
