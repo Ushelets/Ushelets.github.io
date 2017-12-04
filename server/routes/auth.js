@@ -1,8 +1,6 @@
 import express from 'express';
 import Debug from 'debug';
 import async from 'async';
-import series from 'async/series';
-import isEmpty from 'lodash/isEmpty';
 import validator from '../modules/validators';
 import user from '../modules/user';
 
@@ -19,18 +17,11 @@ auth.post('/', (req, res) => {
     }
 
     async.series(
-        {
-            User: (callback) => { user.Auth(email, password, callback) }
-        },
+        {User: (callback) => { user.Auth(email, password, callback) }},
         (err, result) => {
-            if (err) {
-                debug(err)
-            }
-            if (!isEmpty(result.User.Errors)) {
-                return res.status(result.User.code).json(result.User.Errors)
-            }
+        if (err) {return debug(err)}
         req.session.userID = result.User.userID;
-        res.status(200).json(result.User)
+        return res.status(result.User.statusCode).json(result.User)
         }
     );
 });

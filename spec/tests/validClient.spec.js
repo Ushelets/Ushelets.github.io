@@ -1,5 +1,5 @@
 ﻿import valid from '../../src/system/validators'
-import modelClient from '../data/authClient'
+import modelClient from '../data/auth.valid.Client'
 const key = 'reg';
 
 describe('Проверка модуля validators на клиенте:', () => {

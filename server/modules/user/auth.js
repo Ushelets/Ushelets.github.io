@@ -7,41 +7,41 @@ const debug = Debug('server: module: >> user:auth');
 
 export default (email, password, callback) => {
     const User = {
-        Errors: {}
+        statusCode: 201,
+        userID: null
     };
 
     db.select('reputation', 'userID', 'passwordDigest', 'userName').from('users').where({ email: email }).asCallback((err, values) => {
         if (err) {
-            User.Errors.message = 'Ошибка на стороне сервера';
-            User.Errors.code = 500;
+            User.message = 'Ошибка на стороне сервера';
+            User.statusCode = 500;
             debug(err);
-            callback(null, User)
+            return callback(null, User)
         }
         if (!isEmpty(values)) {
             if (bcrypt.compareSync(password, values[0].passwordDigest)) {
                 User.reputation = values[0].reputation;
                 User.userID = values[0].userID;
-                User.userName = values[0].userName;
-                callback(null, User)
+                User.userName = values[0].userName;                
             } else {
-                User.Errors.message = 'Пароли не совпадают!';
-                User.Errors.code = 403;
-                callback(null, User)
+                User.message = 'Пароли не совпадают!';
+                User.statusCode = 403;                
             }
         } else {
             const passwordDigest = bcrypt.hashSync(password, 10);
-            db('users').insert({ passwordDigest: passwordDigest, email: email }).returning('userID').asCallback((err, values) => {
+            db('users').insert({ passwordDigest: passwordDigest, email: email }).returning('userID').asCallback((err, values)=>
+            {
                 if (err) {
-                    User.Errors.message = 'Ошибка на стороне сервера';
-                    User.Errors.code = 500;
+                    User.message = 'Ошибка на стороне сервера';
+                    User.statusCode = 500;
                     debug(err);
-                    callback(null, User)
-                }
+                } else {
                 User.reputation = 0;
                 User.userID = values[0];
                 User.userName = 'Непонятный';
-                callback(null, User)
+                }
             })
         }
+        return callback(null, User)
     })
 }

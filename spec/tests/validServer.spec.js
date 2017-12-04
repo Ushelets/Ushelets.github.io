@@ -1,5 +1,5 @@
 ﻿import valid from '../../server/modules/validators'
-import modelServer from '../data/authServer'
+import modelServer from '../data/auth.valid.Server'
 
 const key = 'reg';
 
